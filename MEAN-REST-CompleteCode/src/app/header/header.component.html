@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+    <span><a mat-raised-button routerLink='/' color='accent'>questionnaire</a></span>
+    <span class='spacer'>
+        
+    </span>
+    <ul>
+        <li *ngIf="userIsAuthenticated"> 
+            <a mat-raised-button routerLink='/create' color='accent'>Add question</a>&nbsp;
+        </li>
+        <li *ngIf="!userIsAuthenticated">
+                <a mat-raised-button routerLink='/login' color='accent'>Login</a>&nbsp;
+        </li>
+        <li *ngIf="!userIsAuthenticated">
+                <a mat-raised-button routerLink='/signup' color='accent'>Sign Up</a>&nbsp;
+        </li>
+        <li *ngIf="userIsAuthenticated">
+                <button mat-raised-button color='warn' (click)="onLogout()"> Logout</button>&nbsp;
+        </li>
+    </ul>
+</mat-toolbar>

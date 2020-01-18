@@ -1,0 +1,23 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion multi='true' *ngIf="ques.length>0 && !isLoading">
+    <mat-expansion-panel *ngFor= "let que of ques" >
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                    {{que.que}}
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Expand to read the answer
+                  </mat-panel-description><br><br>
+        </mat-expansion-panel-header>
+     <div class= 'ques-image'>
+                    <img src={{que.imagePath}}>
+                  </div>
+    <p>{{que.ans}}</p>
+        <mat-action-row *ngIf="isAuthenticated && userId===que.creator">
+            <a mat-raised-button color='primary' [routerLink]="['/edit', que._id]">Edit</a> 
+            <button mat-raised-button color='warn' (click)="onDelete(que._id)" id='delete' name='delete'>Delete</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</mat-accordion>
+<mat-paginator [length]="totalQues" [pageSize]="quesPerPage" [pageSizeOptions]="pageSizeOptions" (page)='onChangedPage($event)' *ngIf="totalQues>0"></mat-paginator>
+<p class='info-text mat-body-1'*ngIf='ques.length<=0 && !isLoading'>No posts added yet!</p>
